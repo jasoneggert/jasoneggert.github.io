@@ -104,13 +104,16 @@
       }
 
       input[type='text'] {
-        width: 100%;
+        width: calc(
+          100% - 22px
+        ); /* Adjusting width to account for padding and border */
         padding: 10px;
         border: 1px solid #ddd;
         border-radius: 4px;
         font-family: var(--monospace-font);
         background-color: white;
         box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box; /* Add box-sizing to include padding in width calculation */
       }
 
       button,
@@ -214,6 +217,7 @@
 
       .entangle-inputs input {
         width: 100%;
+        box-sizing: border-box; /* Add box-sizing to include padding in width calculation */
       }
 
       .action-buttons {
@@ -498,79 +502,66 @@
     <div class="whiteboard">
       <h1>Quantum Mechanics Simulator</h1>
 
-      <!-- Introduction Section -->
+      <!-- Introduction Panel -->
       <div class="panel" style="margin-bottom: 20px">
-        <h2 class="panel-heading">Introduction & Instructions</h2>
+        <h2 class="panel-heading">About This Simulator</h2>
         <div style="padding: 10px">
-          <h3 style="color: #3498db">What is this Quantum Simulator?</h3>
           <p>
-            This interactive tool simulates quantum computing concepts with
-            mathematical accuracy. It models quantum bits (qubits) using complex
-            amplitudes, unitary transformations, and proper quantum measurement
-            mechanics.
+            Welcome to the Quantum Mechanics Simulator! This tool accurately
+            simulates quantum computing concepts using complex amplitudes,
+            unitary transformations, and proper quantum measurement mechanics.
           </p>
 
-          <h3 style="color: #3498db">Key Features:</h3>
-          <ul>
-            <li>
-              <strong>Quantum Gates:</strong> Apply standard gates (X, Y, Z, H,
-              S, T) to manipulate qubit states
-            </li>
-            <li>
-              <strong>Entanglement:</strong> Create quantum entanglement between
-              qubits using CNOT gates
-            </li>
-            <li>
-              <strong>Measurement:</strong> Observe quantum states, causing wave
-              function collapse
-            </li>
-            <li>
-              <strong>Visualization:</strong> See Bloch sphere representations
-              and probability distributions
-            </li>
-          </ul>
+          <div style="display: flex; gap: 20px; margin: 15px 0">
+            <div
+              style="
+                flex: 1;
+                border-left: 3px solid var(--chalk-blue);
+                padding-left: 15px;
+              "
+            >
+              <h3 style="margin-top: 0; color: var(--chalk-blue)">Features</h3>
+              <ul style="padding-left: 20px">
+                <li>Create and manipulate quantum bits (qubits)</li>
+                <li>Apply standard quantum gates</li>
+                <li>Create quantum entanglement</li>
+                <li>Visualize qubits on the Bloch sphere</li>
+                <li>Observe quantum measurement effects</li>
+              </ul>
+            </div>
 
-          <h3 style="color: #3498db">How to Use:</h3>
-          <ol>
-            <li>
-              <strong>Create Qubits:</strong> Enter a name and click "Create
-              Qubit" to add qubits to your system
-            </li>
-            <li>
-              <strong>Apply Gates:</strong> Click on gate buttons and specify
-              which qubit to transform
-            </li>
-            <li>
-              <strong>Entangle Qubits:</strong> Specify control and target
-              qubits to apply CNOT gate for entanglement
-            </li>
-            <li>
-              <strong>Visualize:</strong> Click "Visualize" to see detailed
-              quantum state information
-            </li>
-            <li>
-              <strong>Measure:</strong> Click "Measure All" to collapse qubits
-              to classical states
-            </li>
-            <li>
-              <strong>Reset:</strong> Click "Reset All" to return all qubits to
-              the |0⟩ state
-            </li>
-          </ol>
+            <div
+              style="
+                flex: 1;
+                border-left: 3px solid var(--chalk-green);
+                padding-left: 15px;
+              "
+            >
+              <h3 style="margin-top: 0; color: var(--chalk-green)">
+                How To Use
+              </h3>
+              <ol style="padding-left: 20px">
+                <li>Create qubits with unique names</li>
+                <li>Apply quantum gates to manipulate states</li>
+                <li>Entangle qubits with CNOT operations</li>
+                <li>Visualize states on the Bloch sphere</li>
+                <li>Measure qubits to collapse superpositions</li>
+              </ol>
+            </div>
+          </div>
 
           <div
             style="
-              background-color: rgba(46, 204, 113, 0.1);
-              border-left: 4px solid #2ecc71;
+              background-color: rgba(231, 76, 60, 0.1);
+              border-left: 4px solid var(--chalk-red);
               padding: 10px;
-              margin-top: 15px;
+              margin-top: 10px;
             "
           >
-            <p>
-              <strong>Educational Note:</strong> This simulator follows quantum
-              mechanical principles including superposition, interference, and
-              entanglement. The visualizations help build intuition about
-              quantum computing concepts.
+            <p style="margin: 0">
+              <strong>Note:</strong> This simulator demonstrates key quantum
+              computing principles including superposition, interference,
+              entanglement, and measurement-induced collapse.
             </p>
           </div>
         </div>
