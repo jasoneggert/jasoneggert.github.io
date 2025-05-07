@@ -3,246 +3,1136 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JASON.EGGERT//CYBERSPACE</title>
+    <title>Jason Eggert | Creative Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
-        --neon-pink: #ff2a6d;
-        --neon-blue: #05d9e8;
-        --neon-purple: #9d4edd;
-        --dark-bg: #0d0b14;
-        --terminal-green: #39ff14;
+        /* Refined mid-century modern color palette */
+        --primary: #ea7d50;
+        --secondary: #2a9d8f;
+        --accent: #e76f51;
+        --background: #faf9f6;
+        --dark: #264653;
+        --light: #f0f4f5;
+        --mid-gray: #6d8086;
+        --cream: #f8f4e3;
+        --mustard: #e9c46a;
+        --teal: #457b9d;
+        --off-white: #f9f5ed;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
 
       body {
-        background-color: var(--dark-bg);
-        color: #f1f1f1;
-        font-family: 'Courier New', monospace;
+        background-color: var(--background);
+        color: var(--dark);
+        font-family: 'Poppins', sans-serif;
         margin: 0;
         padding: 0;
-        overflow-x: hidden;
         line-height: 1.6;
+        font-weight: 300;
+        overflow-x: hidden;
       }
 
       .container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 2rem 1rem;
-        position: relative;
-      }
-
-      .glitch-header {
-        font-size: 3rem;
-        text-transform: uppercase;
-        position: relative;
-        color: var(--neon-pink);
-        text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink);
-        margin-bottom: 2rem;
-        letter-spacing: 3px;
-      }
-
-      .glitch-header::before,
-      .glitch-header::after {
-        content: attr(data-text);
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        left: 0;
-      }
-
-      .glitch-header::before {
-        left: 2px;
-        text-shadow: -2px 0 var(--neon-blue);
-        animation: glitch-1 2s infinite linear alternate-reverse;
-      }
-
-      .glitch-header::after {
-        left: -2px;
-        text-shadow: 2px 0 var(--neon-purple);
-        animation: glitch-2 3s infinite linear alternate-reverse;
-      }
-
-      @keyframes glitch-1 {
-        0% {
-          clip-path: inset(20% 0 40% 0);
-        }
-        20% {
-          clip-path: inset(60% 0 1% 0);
-        }
-        40% {
-          clip-path: inset(23% 0 78% 0);
-        }
-        60% {
-          clip-path: inset(94% 0 2% 0);
-        }
-        80% {
-          clip-path: inset(33% 0 54% 0);
-        }
-        100% {
-          clip-path: inset(77% 0 11% 0);
-        }
-      }
-
-      @keyframes glitch-2 {
-        0% {
-          clip-path: inset(68% 0 2% 0);
-        }
-        20% {
-          clip-path: inset(25% 0 55% 0);
-        }
-        40% {
-          clip-path: inset(7% 0 92% 0);
-        }
-        60% {
-          clip-path: inset(38% 0 43% 0);
-        }
-        80% {
-          clip-path: inset(48% 0 31% 0);
-        }
-        100% {
-          clip-path: inset(15% 0 75% 0);
-        }
-      }
-
-      .terminal {
-        background: rgba(0, 0, 0, 0.7);
-        border: 1px solid var(--neon-blue);
-        border-radius: 5px;
-        padding: 1.5rem;
-        margin-bottom: 2rem;
-        position: relative;
-        box-shadow: 0 0 15px rgba(5, 217, 232, 0.5);
-      }
-
-      .terminal::before {
-        content: '> SYSTEM ACCESS GRANTED';
-        color: var(--terminal-green);
-        display: block;
-        margin-bottom: 1rem;
-        font-weight: bold;
-      }
-
-      .links {
-        list-style-type: none;
+        max-width: 100%;
+        margin: 0;
         padding: 0;
+        display: grid;
+        min-height: 100vh;
       }
 
-      .links li {
-        margin: 0.8rem 0;
+      .sidebar {
+        background-color: var(--light);
+        padding: 4rem 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        position: fixed;
+        width: 320px;
+        height: 100vh;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+        z-index: 10;
+      }
+
+      .sidebar-content {
         position: relative;
-        padding-left: 1.5rem;
+        z-index: 2;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
-      .links li::before {
-        content: '>';
-        color: var(--neon-pink);
+      .main-content {
+        padding: 4rem 8%;
+        position: relative;
+        z-index: 1;
+        margin-left: 320px;
+        min-height: 100vh;
+        width: calc(100% - 320px);
+      }
+
+      .logo-container {
+        margin-bottom: 2.5rem;
+        position: relative;
+      }
+
+      .logo-placeholder {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background-color: var(--dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        background-image: url('egg2.593a9f4f.png');
+        background-size: cover;
+        background-position: center;
+        border: 6px solid white;
+        transition: transform 0.5s ease;
+      }
+
+      .logo-placeholder:hover {
+        transform: scale(1.03);
+      }
+
+      .sidebar-shape {
         position: absolute;
-        left: 0;
-        top: 0;
+        bottom: 15%;
+        left: 10%;
+        width: 120px;
+        height: 120px;
+        background-color: var(--mustard);
+        opacity: 0.2;
+        border-radius: 65% 0 65% 0;
+        z-index: 0;
+        transform: rotate(15deg);
       }
 
-      .links a {
-        color: var(--neon-blue);
+      .sidebar-shape-2 {
+        position: absolute;
+        top: 15%;
+        right: 10%;
+        width: 80px;
+        height: 80px;
+        background-color: var(--teal);
+        opacity: 0.2;
+        border-radius: 50%;
+        z-index: 0;
+      }
+
+      .name-title {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.8rem;
+        font-weight: 400;
+        margin: 1.2rem 0 0.5rem;
+        color: var(--dark);
+        letter-spacing: 1px;
+        text-align: center;
+      }
+
+      .profession {
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: var(--mid-gray);
+        margin-bottom: 2rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      .nav-menu {
+        width: 100%;
+        margin: 1rem 0 2rem;
+      }
+
+      .nav-menu ul {
+        list-style: none;
+        padding: 0;
+        width: 100%;
+      }
+
+      .nav-menu li {
+        margin-bottom: 0.5rem;
+        width: 100%;
+      }
+
+      .nav-menu a {
+        display: block;
+        padding: 0.6rem 1rem;
         text-decoration: none;
+        color: var(--dark);
+        border-radius: 4px;
         transition: all 0.3s ease;
+        font-weight: 400;
         position: relative;
-        padding: 0.2rem 0;
+        overflow: hidden;
       }
 
-      .links a:hover {
-        color: var(--neon-pink);
-        text-shadow: 0 0 8px var(--neon-pink);
-      }
-
-      .links a::after {
+      .nav-menu a::before {
         content: '';
         position: absolute;
-        bottom: 0;
         left: 0;
+        bottom: 0;
         width: 0;
         height: 2px;
-        background-color: var(--neon-pink);
+        background-color: var(--primary);
         transition: width 0.3s ease;
       }
 
-      .links a:hover::after {
+      .nav-menu a:hover::before {
         width: 100%;
       }
 
-      .status {
-        font-size: 0.8rem;
-        color: var(--neon-purple);
-        margin-top: 3rem;
-        border-top: 1px solid rgba(157, 78, 221, 0.3);
-        padding-top: 1rem;
+      .nav-menu a:hover,
+      .nav-menu a.active {
+        color: var(--primary);
       }
 
-      .blink {
-        animation: blink 1s infinite;
+      .social-links {
+        margin-top: auto;
+        display: flex;
+        gap: 1rem;
+        padding-top: 2rem;
       }
 
-      @keyframes blink {
-        0%,
-        49% {
+      .social-link {
+        width: 40px;
+        height: 40px;
+        border: 2px solid var(--primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .social-link:hover {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      section {
+        padding: 3rem 0;
+        position: relative;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+
+      @keyframes fadeIn {
+        to {
           opacity: 1;
-        }
-        50%,
-        100% {
-          opacity: 0;
+          transform: translateY(0);
         }
       }
 
-      .grid-bg {
-        position: fixed;
+      section:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      section:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      section:nth-child(4) {
+        animation-delay: 0.6s;
+      }
+
+      h1 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 3.2rem;
+        font-weight: 400;
+        margin-bottom: 1.5rem;
+        color: var(--dark);
+        position: relative;
+        display: inline-block;
+      }
+
+      h1::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 80px;
+        height: 4px;
+        background-color: var(--secondary);
+      }
+
+      h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 2.4rem;
+        font-weight: 400;
+        margin: 0 0 2rem;
+        color: var(--dark);
+        position: relative;
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: center;
+        margin-bottom: 3rem;
+        position: relative;
+      }
+
+      .section-heading h2 {
+        margin: 0;
+      }
+
+      .section-heading::before {
+        content: '';
+        width: 24px;
+        height: 24px;
+        background-color: var(--secondary);
+        opacity: 0.7;
+        margin-right: 1rem;
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      }
+
+      .intro {
+        font-size: 1.25rem;
+        line-height: 1.9;
+        max-width: 800px;
+        margin-bottom: 4rem;
+        color: var(--mid-gray);
+        position: relative;
+      }
+
+      .intro::after {
+        content: '';
+        position: absolute;
+        bottom: -2rem;
+        left: 0;
+        width: 100px;
+        height: 1px;
+        background-color: var(--mid-gray);
+        opacity: 0.3;
+      }
+
+      .highlight {
+        color: var(--primary);
+        font-weight: 500;
+      }
+
+      .projects-container {
+        margin-top: 3rem;
+      }
+
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 2.5rem;
+        margin-top: 2rem;
+      }
+
+      .project-card {
+        background-color: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        position: relative;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .project-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      }
+
+      .project-card a {
+        text-decoration: none;
+        color: var(--dark);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 0;
+      }
+
+      .project-image {
+        height: 200px;
+        width: 100%;
+        background-color: var(--light);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-image.superposition {
+        background: linear-gradient(135deg, #3498db, #9b59b6);
+      }
+
+      .project-image.harmonic {
+        background: linear-gradient(135deg, #2ecc71, #3498db);
+      }
+
+      .project-image.retrograde {
+        background: linear-gradient(135deg, #e67e22, #e74c3c);
+      }
+
+      .project-content {
+        padding: 2rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .project-card h3 {
+        margin: 0 0 0.8rem;
+        font-weight: 500;
+        font-size: 1.5rem;
+        color: var(--dark);
+        letter-spacing: 0.5px;
+      }
+
+      .project-card p {
+        margin: 0 0 1.5rem;
+        font-size: 1rem;
+        color: var(--mid-gray);
+        flex-grow: 1;
+      }
+
+      .project-tag {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        background-color: var(--off-white);
+        color: var(--mid-gray);
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .project-link {
+        display: inline-flex;
+        align-items: center;
+        margin-top: auto;
+        color: var(--primary);
+        font-weight: 500;
+      }
+
+      .project-link::after {
+        content: '→';
+        margin-left: 0.5rem;
+        transition: transform 0.3s ease;
+      }
+
+      .project-card:hover .project-link::after {
+        transform: translateX(4px);
+      }
+
+      .accent-line {
+        position: absolute;
         top: 0;
         left: 0;
+        height: 4px;
+        width: 100%;
+        background: linear-gradient(to right, var(--secondary), var(--primary));
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin-top: 3rem;
+      }
+
+      .about-text {
+        line-height: 1.8;
+      }
+
+      .about-text p {
+        margin-bottom: 1.5rem;
+      }
+
+      .skills-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .skill-tag {
+        padding: 0.5rem 1rem;
+        background-color: var(--light);
+        border-radius: 50px;
+        font-size: 0.9rem;
+        color: var(--mid-gray);
+      }
+
+      .contact-form {
+        max-width: 600px;
+        margin-top: 2rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--dark);
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        color: var(--dark);
+        background-color: white;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+      }
+
+      .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.8rem 2rem;
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        background-color: var(--accent);
+        transform: translateY(-2px);
+      }
+
+      .footer {
+        margin-top: 6rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.07);
+        font-size: 0.9rem;
+        color: var(--mid-gray);
+        display: flex;
+        justify-content: space-between;
+      }
+
+      @media (max-width: 1200px) {
+        .container {
+          grid-template-columns: 280px 1fr;
+        }
+
+        .sidebar {
+          width: 280px;
+        }
+
+        .main-content {
+          margin-left: 280px;
+          padding: 4rem 6%;
+          width: calc(100% - 280px);
+        }
+      }
+
+      @media (max-width: 992px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          position: relative;
+          height: auto;
+          width: 100%;
+          padding: 2rem;
+        }
+
+        .main-content {
+          margin-left: 0;
+          padding: 3rem 5%;
+          width: 100%;
+        }
+
+        .social-links {
+          margin-top: 2rem;
+        }
+
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .welcome-container {
+          flex-direction: column-reverse;
+          gap: 2rem;
+        }
+
+        .headshot-container {
+          margin-bottom: 1rem;
+        }
+
+        .headshot-circle {
+          width: 200px;
+          height: 200px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        h2 {
+          font-size: 2rem;
+        }
+
+        .intro {
+          font-size: 1.1rem;
+        }
+
+        .project-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .headshot-circle {
+          width: 180px;
+          height: 180px;
+          border-width: 6px;
+        }
+      }
+
+      /* Mid-century modern geometric accents */
+      .geometric-accents {
+        position: absolute;
+        top: 0;
+        right: 0;
         width: 100%;
         height: 100%;
-        background-image: linear-gradient(
-            to right,
-            rgba(5, 217, 232, 0.1) 1px,
-            transparent 1px
-          ),
-          linear-gradient(
-            to bottom,
-            rgba(5, 217, 232, 0.1) 1px,
-            transparent 1px
-          );
-        background-size: 30px 30px;
-        z-index: -1;
-        transform: perspective(500px) rotateX(60deg);
-        transform-origin: top;
-        opacity: 0.2;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .geo-shape {
+        position: absolute;
+        opacity: 0.15;
+      }
+
+      .geo-shape-1 {
+        top: 80px;
+        right: 60px;
+        width: 150px;
+        height: 8px;
+        background-color: var(--mustard);
+        transform: rotate(-35deg);
+      }
+
+      .geo-shape-2 {
+        top: 180px;
+        right: 15%;
+        width: 60px;
+        height: 60px;
+        border: 6px solid var(--secondary);
+        border-radius: 50%;
+      }
+
+      .geo-shape-3 {
+        bottom: 20%;
+        right: 10%;
+        width: 80px;
+        height: 80px;
+        background-color: var(--accent);
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      }
+
+      .geo-shape-4 {
+        bottom: 30%;
+        right: 30%;
+        width: 120px;
+        height: 5px;
+        background-color: var(--primary);
+      }
+
+      .geo-shape-5 {
+        top: 40%;
+        right: 20%;
+        width: 40px;
+        height: 40px;
+        background-color: var(--teal);
+        border-radius: 0 50% 50% 50%;
+        transform: rotate(45deg);
+      }
+
+      .content-wrapper {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Boomerang mid-century shape */
+      .boomerang {
+        position: absolute;
+        top: 30%;
+        right: 5%;
+        width: 180px;
+        height: 100px;
+        clip-path: path(
+          'M0,0 C60,10 180,40 180,100 L160,100 C160,50 50,25 0,15 L0,0 Z'
+        );
+        background-color: var(--mustard);
+        opacity: 0.12;
+        transform: rotate(15deg);
+      }
+
+      /* Mid-century starburst */
+      .starburst {
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        bottom: 15%;
+        left: 10%;
+        opacity: 0.08;
+        background-image: radial-gradient(
+          circle,
+          transparent 30%,
+          var(--primary) 30%
+        );
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L50 100 M0 50 L100 50 M25 25 L75 75 M25 75 L75 25 M14.64 30.93 L85.36 69.07 M14.64 69.07 L85.36 30.93 M30.93 14.64 L69.07 85.36 M30.93 85.36 L69.07 14.64' stroke='%23000' stroke-width='3'/%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L50 100 M0 50 L100 50 M25 25 L75 75 M25 75 L75 25 M14.64 30.93 L85.36 69.07 M14.64 69.07 L85.36 30.93 M30.93 14.64 L69.07 85.36 M30.93 85.36 L69.07 14.64' stroke='%23000' stroke-width='3'/%3E%3C/svg%3E");
+        transform: rotate(22.5deg);
+      }
+
+      /* Parallax effect for geometric shapes */
+      .parallax-shape {
+        transition: transform 0.1s ease-out;
+      }
+
+      .welcome-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 3rem;
+      }
+
+      .welcome-content {
+        flex: 1;
+      }
+
+      .headshot-container {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .headshot-circle {
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        background-color: var(--light);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        background-image: url('egg2.593a9f4f.png'); /* Using your existing image for now */
+        background-size: cover;
+        background-position: center;
+        border: 8px solid white;
+        position: relative;
+        z-index: 2;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      .headshot-circle:hover {
+        transform: scale(1.03);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .headshot-container::before {
+        content: '';
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background-color: var(--secondary);
+        opacity: 0.1;
+        top: -20px;
+        left: -20px;
+        z-index: 1;
+      }
+
+      .headshot-container::after {
+        content: '';
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        bottom: -10px;
+        right: -10px;
+        background-color: var(--primary);
+        opacity: 0.1;
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        z-index: 1;
+      }
+
+      @media (max-width: 992px) {
+        .welcome-container {
+          flex-direction: column-reverse;
+          gap: 2rem;
+        }
+
+        .headshot-container {
+          margin-bottom: 1rem;
+        }
+
+        .headshot-circle {
+          width: 200px;
+          height: 200px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        h2 {
+          font-size: 2rem;
+        }
+
+        .intro {
+          font-size: 1.1rem;
+        }
+
+        .project-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .headshot-circle {
+          width: 180px;
+          height: 180px;
+          border-width: 6px;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="grid-bg"></div>
-
     <div class="container">
-      <h1 class="glitch-header" data-text="JASON.EGGERT">JASON.EGGERT</h1>
+      <div class="sidebar">
+        <div class="sidebar-content">
+          <div class="logo-container">
+            <div class="logo-placeholder"></div>
+          </div>
 
-      <div class="terminal">
-        <p>
-          Welcome to my digital outpost in the vast network. Navigate through my
-          projects and explorations in the digital realm.
-        </p>
+          <h3 class="name-title">Jason Eggert</h3>
+          <p class="profession">Creative Developer</p>
 
-        <ul class="links">
-          <li>
-            <a href="./superposition/">SUPERPOSITION//</a> - Quantum experiments
-            in digital space
-          </li>
-          <!-- More links will be added here in the future -->
-        </ul>
+          <nav class="nav-menu">
+            <ul>
+              <li><a href="#home" class="active">Home</a></li>
+              <li><a href="#projects">Projects</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+
+          <div class="social-links">
+            <a href="#" class="social-link" title="LinkedIn">in</a>
+            <a href="#" class="social-link" title="GitHub">gh</a>
+            <a href="#" class="social-link" title="Twitter">tw</a>
+          </div>
+        </div>
+
+        <!-- <div class="sidebar-shape"></div>
+        <div class="sidebar-shape-2"></div> -->
       </div>
 
-      <div class="status">
-        <p>STATUS: ONLINE</p>
-        <p>SYSTEM: OPERATIONAL <span class="blink">_</span></p>
-        <p>LAST UPDATE: 2025-04-18</p>
-        <p>MORE CONNECTIONS ESTABLISHING SOON...</p>
+      <div class="main-content">
+        <div class="geometric-accents">
+          <div class="geo-shape geo-shape-1 parallax-shape"></div>
+          <div class="geo-shape geo-shape-2 parallax-shape"></div>
+          <div class="geo-shape geo-shape-3 parallax-shape"></div>
+          <div class="geo-shape geo-shape-4 parallax-shape"></div>
+          <div class="geo-shape geo-shape-5 parallax-shape"></div>
+          <div class="boomerang parallax-shape"></div>
+          <div class="starburst parallax-shape"></div>
+        </div>
+
+        <div class="content-wrapper">
+          <section id="home">
+            <div class="welcome-container">
+              <div class="welcome-content">
+                <h1>Welcome</h1>
+                <p class="intro">
+                  Hello there! I'm <span class="highlight">Jason Eggert</span>,
+                  a creative developer with a passion for blending design and
+                  technology. My work explores the intersection of digital
+                  experiences and artistic expression, creating meaningful
+                  interactions that engage and inspire through
+                  <span class="highlight">clean code</span> and
+                  <span class="highlight">thoughtful design</span>.
+                </p>
+              </div>
+              <div class="headshot-container">
+                <div class="headshot-circle">
+                  <!-- You can replace the background-image in the CSS with your actual headshot -->
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="projects">
+            <div class="section-heading">
+              <h2>Projects</h2>
+            </div>
+
+            <div class="project-grid">
+              <div class="project-card">
+                <div class="accent-line"></div>
+                <a href="./superposition/">
+                  <div class="project-image superposition"></div>
+                  <div class="project-content">
+                    <h3>SUPERPOSITION</h3>
+                    <p>
+                      An interactive quantum computing simulator that visualizes
+                      complex quantum phenomena through an intuitive user
+                      interface.
+                    </p>
+                    <div>
+                      <span class="project-tag">JavaScript</span>
+                      <span class="project-tag">Quantum</span>
+                    </div>
+                    <span class="project-link">View Project</span>
+                  </div>
+                </a>
+              </div>
+
+              <div class="project-card">
+                <div class="accent-line"></div>
+                <a href="#">
+                  <div class="project-image harmonic"></div>
+                  <div class="project-content">
+                    <h3>HARMONIC</h3>
+                    <p>
+                      Experimental audio visualization platform that transforms
+                      sound into dynamic, interactive visual compositions.
+                    </p>
+                    <div>
+                      <span class="project-tag">WebAudio API</span>
+                      <span class="project-tag">Canvas</span>
+                    </div>
+                    <span class="project-link">Coming Soon</span>
+                  </div>
+                </a>
+              </div>
+
+              <div class="project-card">
+                <div class="accent-line"></div>
+                <a href="#">
+                  <div class="project-image retrograde"></div>
+                  <div class="project-content">
+                    <h3>RETROGRADE</h3>
+                    <p>
+                      A collection of mid-century modern inspired graphic
+                      explorations, celebrating the design aesthetic of the
+                      1950s and 60s.
+                    </p>
+                    <div>
+                      <span class="project-tag">SVG</span>
+                      <span class="project-tag">CSS</span>
+                    </div>
+                    <span class="project-link">View Gallery</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <section id="about">
+            <div class="section-heading">
+              <h2>About Me</h2>
+            </div>
+
+            <div class="about-grid">
+              <div class="about-text">
+                <p>
+                  With over 8 years of experience in creative development, I
+                  specialize in crafting engaging digital experiences that merge
+                  form and function. My approach combines technical precision
+                  with artistic sensitivity, resulting in projects that are both
+                  visually compelling and technically sound.
+                </p>
+                <p>
+                  I'm particularly fascinated by the intersection of art and
+                  technology, drawing inspiration from mid-century modern design
+                  principles while implementing contemporary development
+                  practices. This fusion of retro aesthetics with cutting-edge
+                  technology creates a distinctive style in my work.
+                </p>
+              </div>
+
+              <div>
+                <h3>Skills &amp; Expertise</h3>
+                <div class="skills-list">
+                  <span class="skill-tag">JavaScript</span>
+                  <span class="skill-tag">React</span>
+                  <span class="skill-tag">Three.js</span>
+                  <span class="skill-tag">WebGL</span>
+                  <span class="skill-tag">CSS Animation</span>
+                  <span class="skill-tag">SVG</span>
+                  <span class="skill-tag">Creative Coding</span>
+                  <span class="skill-tag">UI/UX Design</span>
+                  <span class="skill-tag">Data Visualization</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="contact">
+            <div class="section-heading">
+              <h2>Get In Touch</h2>
+            </div>
+
+            <p>
+              Interested in working together? Have a question about my projects?
+              Feel free to reach out!
+            </p>
+
+            <div class="contact-form">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" />
+              </div>
+
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message"></textarea>
+              </div>
+
+              <button class="btn">Send Message</button>
+            </div>
+          </section>
+
+          <div class="footer">
+            <p>© 2025 Jason Eggert</p>
+            <p>Last updated: April 29, 2025</p>
+          </div>
+        </div>
       </div>
     </div>
+
+    <script>
+      // Enhanced parallax effect for geometric shapes
+      document.addEventListener('mousemove', function (e) {
+        const shapes = document.querySelectorAll('.parallax-shape');
+        const mouseX = e.clientX / window.innerWidth;
+        const mouseY = e.clientY / window.innerHeight;
+
+        shapes.forEach((shape, index) => {
+          // Increased intensity values for more dramatic movement
+          const intensity = 30 + index * 15;
+          const translateX = (mouseX - 0.5) * intensity;
+          const translateY = (mouseY - 0.5) * intensity;
+
+          // Get original rotation if any, or use default
+          const originalRotation = shape.dataset.rotate || '0deg';
+          // Add slight rotation based on mouse position for more dynamic effect
+          const rotationAdjustment = (mouseX - 0.5) * 5;
+
+          // Apply transform with enhanced movement and smoother transition
+          shape.style.transition = 'transform 0.2s ease-out';
+          shape.style.transform = `translate(${translateX}px, ${translateY}px) rotate(calc(${originalRotation} + ${rotationAdjustment}deg))`;
+        });
+      });
+
+      // Initialize data-rotate attributes for shapes that should have initial rotation
+      document.addEventListener('DOMContentLoaded', function () {
+        const geoShape1 = document.querySelector('.geo-shape-1');
+        if (geoShape1) geoShape1.dataset.rotate = '-35deg';
+
+        const boomerang = document.querySelector('.boomerang');
+        if (boomerang) boomerang.dataset.rotate = '15deg';
+
+        const starburst = document.querySelector('.starburst');
+        if (starburst) starburst.dataset.rotate = '22.5deg';
+
+        const geoShape5 = document.querySelector('.geo-shape-5');
+        if (geoShape5) geoShape5.dataset.rotate = '45deg';
+      });
+
+      // Smooth scrolling for navigation
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop,
+              behavior: 'smooth'
+            });
+
+            // Update active state
+            document.querySelectorAll('.nav-menu a').forEach((link) => {
+              link.classList.remove('active');
+            });
+            this.classList.add('active');
+          }
+        });
+      });
+
+      // Update active menu item on scroll
+      window.addEventListener('scroll', function () {
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
+        let currentSection = '';
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+
+          if (pageYOffset >= sectionTop - 300) {
+            currentSection = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${currentSection}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+    </script>
   </body>
 </html>
