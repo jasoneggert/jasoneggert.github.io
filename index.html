@@ -12,18 +12,15 @@
     />
     <style>
       :root {
-        /* Refined mid-century modern color palette */
-        --primary: #ea7d50;
-        --secondary: #2a9d8f;
-        --accent: #e76f51;
-        --background: #faf9f6;
-        --dark: #264653;
-        --light: #f0f4f5;
-        --mid-gray: #6d8086;
-        --cream: #f8f4e3;
-        --mustard: #e9c46a;
-        --teal: #457b9d;
-        --off-white: #f9f5ed;
+        /* Simplified color palette */
+        --primary: #3a6ea5;
+        --secondary: #004e64;
+        --accent: #ff6b6b;
+        --background: #ffffff;
+        --dark: #333333;
+        --light: #f8f8f8;
+        --mid-gray: #6d7278;
+        --off-white: #f5f5f5;
       }
 
       * {
@@ -33,137 +30,112 @@
       }
 
       body {
-        background-color: var(--background);
-        color: var(--dark);
-        font-family: 'Poppins', sans-serif;
         margin: 0;
+        background-color: var(--background);
         padding: 0;
-        line-height: 1.6;
-        font-weight: 300;
         overflow-x: hidden;
+        color: var(--dark);
+        font-weight: 300;
+        line-height: 1.6;
+        font-family: 'Poppins', sans-serif;
       }
 
       .container {
-        max-width: 100%;
+        display: grid;
         margin: 0;
         padding: 0;
-        display: grid;
+        max-width: 100%;
         min-height: 100vh;
       }
 
       .sidebar {
-        background-color: var(--light);
-        padding: 4rem 2rem;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
         position: fixed;
-        width: 320px;
-        height: 100vh;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
         z-index: 10;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        background-color: var(--light);
+        padding: 3rem 2rem;
+        width: 280px;
+        height: 100vh;
       }
 
       .sidebar-content {
-        position: relative;
-        z-index: 2;
-        width: 100%;
         display: flex;
+        position: relative;
         flex-direction: column;
         align-items: center;
+        z-index: 2;
+        width: 100%;
       }
 
       .main-content {
-        padding: 4rem 8%;
         position: relative;
         z-index: 1;
-        margin-left: 320px;
+        margin-left: 280px;
+        padding: 4rem 8%;
+        width: calc(100% - 280px);
         min-height: 100vh;
-        width: calc(100% - 320px);
       }
 
       .logo-container {
-        margin-bottom: 2.5rem;
         position: relative;
+        margin-bottom: 2rem;
       }
 
       .logo-placeholder {
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        background-color: var(--dark);
         display: flex;
-        align-items: center;
-        justify-content: center;
         position: relative;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border: 4px solid white;
+        border-radius: 50%;
         background-image: url('egg2.593a9f4f.png');
-        background-size: cover;
         background-position: center;
-        border: 6px solid white;
-        transition: transform 0.5s ease;
+        background-size: cover;
+        background-color: var(--dark);
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
       }
 
       .logo-placeholder:hover {
-        transform: scale(1.03);
-      }
-
-      .sidebar-shape {
-        position: absolute;
-        bottom: 15%;
-        left: 10%;
-        width: 120px;
-        height: 120px;
-        background-color: var(--mustard);
-        opacity: 0.2;
-        border-radius: 65% 0 65% 0;
-        z-index: 0;
-        transform: rotate(15deg);
-      }
-
-      .sidebar-shape-2 {
-        position: absolute;
-        top: 15%;
-        right: 10%;
-        width: 80px;
-        height: 80px;
-        background-color: var(--teal);
-        opacity: 0.2;
-        border-radius: 50%;
-        z-index: 0;
+        transform: scale(1.02);
       }
 
       .name-title {
-        font-family: 'DM Serif Display', serif;
-        font-size: 1.8rem;
-        font-weight: 400;
-        margin: 1.2rem 0 0.5rem;
+        margin: 1rem 0 0.3rem;
         color: var(--dark);
-        letter-spacing: 1px;
+        font-weight: 400;
+        font-size: 1.6rem;
+        font-family: 'DM Serif Display', serif;
+        letter-spacing: 0.5px;
         text-align: center;
       }
 
       .profession {
-        font-size: 0.9rem;
-        font-weight: 400;
-        color: var(--mid-gray);
         margin-bottom: 2rem;
-        letter-spacing: 2px;
-        text-transform: uppercase;
+        color: var(--mid-gray);
+        font-weight: 400;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
         text-align: center;
+        text-transform: uppercase;
       }
 
       .nav-menu {
-        width: 100%;
         margin: 1rem 0 2rem;
+        width: 100%;
       }
 
       .nav-menu ul {
-        list-style: none;
         padding: 0;
         width: 100%;
+        list-style: none;
       }
 
       .nav-menu li {
@@ -173,156 +145,87 @@
 
       .nav-menu a {
         display: block;
+        transition: all 0.2s ease;
         padding: 0.6rem 1rem;
-        text-decoration: none;
         color: var(--dark);
-        border-radius: 4px;
-        transition: all 0.3s ease;
         font-weight: 400;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .nav-menu a::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 0;
-        height: 2px;
-        background-color: var(--primary);
-        transition: width 0.3s ease;
-      }
-
-      .nav-menu a:hover::before {
-        width: 100%;
+        text-decoration: none;
       }
 
       .nav-menu a:hover,
       .nav-menu a.active {
+        border-left: 2px solid var(--primary);
+        background-color: rgba(58, 110, 165, 0.05);
         color: var(--primary);
       }
 
       .social-links {
-        margin-top: auto;
         display: flex;
         gap: 1rem;
+        margin-top: auto;
         padding-top: 2rem;
       }
 
       .social-link {
-        width: 40px;
-        height: 40px;
-        border: 2px solid var(--primary);
-        border-radius: 50%;
         display: flex;
-        align-items: center;
         justify-content: center;
-        color: var(--primary);
-        text-decoration: none;
+        align-items: center;
         transition: all 0.3s ease;
+        border: 1px solid var(--mid-gray);
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        color: var(--mid-gray);
+        text-decoration: none;
       }
 
       .social-link:hover {
+        border-color: var(--primary);
         background-color: var(--primary);
         color: white;
       }
 
       section {
-        padding: 3rem 0;
         position: relative;
-        opacity: 0;
-        transform: translateY(30px);
-        animation: fadeIn 0.8s ease-out forwards;
-      }
-
-      @keyframes fadeIn {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      section:nth-child(2) {
-        animation-delay: 0.2s;
-      }
-
-      section:nth-child(3) {
-        animation-delay: 0.4s;
-      }
-
-      section:nth-child(4) {
-        animation-delay: 0.6s;
+        margin-bottom: 2rem;
+        padding: 2rem 0;
       }
 
       h1 {
-        font-family: 'DM Serif Display', serif;
-        font-size: 3.2rem;
-        font-weight: 400;
+        display: inline-block;
+        position: relative;
         margin-bottom: 1.5rem;
         color: var(--dark);
-        position: relative;
-        display: inline-block;
+        font-weight: 400;
+        font-size: 2.8rem;
+        font-family: 'DM Serif Display', serif;
       }
 
       h1::after {
-        content: '';
         position: absolute;
-        bottom: -10px;
+        bottom: -8px;
         left: 0;
-        width: 80px;
-        height: 4px;
-        background-color: var(--secondary);
+        background-color: var(--primary);
+        width: 60px;
+        height: 3px;
+        content: '';
       }
 
       h2 {
-        font-family: 'DM Serif Display', serif;
-        font-size: 2.4rem;
-        font-weight: 400;
-        margin: 0 0 2rem;
+        position: relative;
+        margin: 0 0 1.5rem;
         color: var(--dark);
-        position: relative;
-      }
-
-      .section-heading {
-        display: flex;
-        align-items: center;
-        margin-bottom: 3rem;
-        position: relative;
-      }
-
-      .section-heading h2 {
-        margin: 0;
-      }
-
-      .section-heading::before {
-        content: '';
-        width: 24px;
-        height: 24px;
-        background-color: var(--secondary);
-        opacity: 0.7;
-        margin-right: 1rem;
-        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        font-weight: 400;
+        font-size: 2.2rem;
+        font-family: 'DM Serif Display', serif;
       }
 
       .intro {
-        font-size: 1.25rem;
-        line-height: 1.9;
+        margin-bottom: 3rem;
         max-width: 800px;
-        margin-bottom: 4rem;
         color: var(--mid-gray);
-        position: relative;
-      }
-
-      .intro::after {
-        content: '';
-        position: absolute;
-        bottom: -2rem;
-        left: 0;
-        width: 100px;
-        height: 1px;
-        background-color: var(--mid-gray);
-        opacity: 0.3;
+        font-size: 1.2rem;
+        line-height: 1.8;
       }
 
       .highlight {
@@ -330,96 +233,100 @@
         font-weight: 500;
       }
 
-      .projects-container {
-        margin-top: 3rem;
-      }
-
       .project-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-        gap: 2.5rem;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
         margin-top: 2rem;
       }
 
       .project-card {
-        background-color: white;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
-        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        position: relative;
-        border: 1px solid rgba(0, 0, 0, 0.05);
-        height: 100%;
         display: flex;
+        position: relative;
         flex-direction: column;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        border-radius: 8px;
+        background-color: white;
+        height: 100%;
+        overflow: hidden;
       }
 
       .project-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       }
 
       .project-card a {
-        text-decoration: none;
-        color: var(--dark);
         display: flex;
         flex-direction: column;
-        height: 100%;
         padding: 0;
+        height: 100%;
+        color: var(--dark);
+        text-decoration: none;
       }
 
       .project-image {
-        height: 200px;
-        width: 100%;
-        background-color: var(--light);
         position: relative;
+        background-color: var(--light);
+        width: 100%;
+        height: 180px;
         overflow: hidden;
       }
 
       .project-image.superposition {
-        background: linear-gradient(135deg, #3498db, #9b59b6);
+        background: linear-gradient(135deg, #3a6ea5, #004e64);
       }
 
       .project-image.harmonic {
-        background: linear-gradient(135deg, #2ecc71, #3498db);
+        background: linear-gradient(135deg, #004e64, #3a6ea5);
       }
 
       .project-image.retrograde {
-        background: linear-gradient(135deg, #e67e22, #e74c3c);
+        background: linear-gradient(135deg, #ff6b6b, #f9a826);
+      }
+
+      .project-image.dewarp {
+        background: linear-gradient(135deg, #3a6ea5, #f9a826);
       }
 
       .project-content {
-        padding: 2rem;
-        flex-grow: 1;
         display: flex;
+        flex-grow: 1;
         flex-direction: column;
+        padding: 1.5rem;
       }
 
       .project-card h3 {
         margin: 0 0 0.8rem;
-        font-weight: 500;
-        font-size: 1.5rem;
         color: var(--dark);
-        letter-spacing: 0.5px;
+        font-weight: 500;
+        font-size: 1.3rem;
       }
 
       .project-card p {
-        margin: 0 0 1.5rem;
-        font-size: 1rem;
-        color: var(--mid-gray);
         flex-grow: 1;
+        margin: 0 0 1.2rem;
+        color: var(--mid-gray);
+        font-size: 0.95rem;
+      }
+
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
       }
 
       .project-tag {
         display: inline-block;
-        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
         background-color: var(--off-white);
+        padding: 0.3rem 0.7rem;
         color: var(--mid-gray);
-        border-radius: 50px;
+        font-weight: 400;
         font-size: 0.8rem;
-        font-weight: 500;
-        margin-right: 0.5rem;
-        margin-bottom: 0.5rem;
       }
 
       .project-link {
@@ -428,84 +335,77 @@
         margin-top: auto;
         color: var(--primary);
         font-weight: 500;
+        font-size: 0.95rem;
       }
 
       .project-link::after {
-        content: '→';
-        margin-left: 0.5rem;
         transition: transform 0.3s ease;
+        margin-left: 0.5rem;
+        content: '→';
       }
 
       .project-card:hover .project-link::after {
         transform: translateX(4px);
       }
 
-      .accent-line {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 4px;
-        width: 100%;
-        background: linear-gradient(to right, var(--secondary), var(--primary));
-      }
-
       .about-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 3rem;
-        margin-top: 3rem;
+        gap: 2.5rem;
+        margin-top: 2rem;
       }
 
       .about-text {
-        line-height: 1.8;
+        line-height: 1.7;
       }
 
       .about-text p {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.2rem;
       }
 
       .skills-list {
         display: flex;
         flex-wrap: wrap;
-        gap: 1rem;
-        margin-top: 1.5rem;
+        gap: 0.8rem;
+        margin-top: 1.2rem;
       }
 
       .skill-tag {
-        padding: 0.5rem 1rem;
+        border-radius: 4px;
         background-color: var(--light);
-        border-radius: 50px;
-        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
         color: var(--mid-gray);
+        font-size: 0.85rem;
       }
 
       .contact-form {
+        margin-top: 1.5rem;
         max-width: 600px;
-        margin-top: 2rem;
       }
 
       .form-group {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.2rem;
       }
 
       .form-group label {
         display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
+        margin-bottom: 0.4rem;
         color: var(--dark);
+        font-weight: 500;
+        font-size: 0.95rem;
       }
 
       .form-group input,
       .form-group textarea {
-        width: 100%;
-        padding: 0.8rem 1rem;
+        transition: border-color 0.3s ease;
         border: 1px solid #ddd;
         border-radius: 4px;
-        font-family: 'Poppins', sans-serif;
-        font-size: 1rem;
-        color: var(--dark);
         background-color: white;
-        transition: border-color 0.3s ease;
+        padding: 0.7rem 1rem;
+        width: 100%;
+        color: var(--dark);
+        font-size: 0.95rem;
+        font-family: 'Poppins', sans-serif;
       }
 
       .form-group input:focus,
@@ -515,52 +415,67 @@
       }
 
       .form-group textarea {
-        min-height: 150px;
+        min-height: 120px;
         resize: vertical;
       }
 
       .btn {
         display: inline-block;
-        padding: 0.8rem 2rem;
-        background-color: var(--primary);
-        color: white;
+        transition: all 0.3s ease;
+        cursor: pointer;
         border: none;
         border-radius: 4px;
-        font-family: 'Poppins', sans-serif;
-        font-size: 1rem;
+        background-color: var(--primary);
+        padding: 0.7rem 1.8rem;
+        color: white;
         font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s ease;
+        font-size: 0.95rem;
+        font-family: 'Poppins', sans-serif;
       }
 
       .btn:hover {
-        background-color: var(--accent);
-        transform: translateY(-2px);
+        background-color: var(--secondary);
       }
 
       .footer {
-        margin-top: 6rem;
-        padding-top: 2rem;
-        border-top: 1px solid rgba(0, 0, 0, 0.07);
-        font-size: 0.9rem;
-        color: var(--mid-gray);
         display: flex;
         justify-content: space-between;
+        margin-top: 5rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.07);
+        padding-top: 1.5rem;
+        color: var(--mid-gray);
+        font-size: 0.85rem;
+      }
+
+      .welcome-container {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+      }
+
+      .welcome-content {
+        flex: 1;
+      }
+
+      .headshot-container {
+        flex-shrink: 0;
+      }
+
+      .headshot-circle {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        border: 4px solid white;
+        border-radius: 50%;
+        background-image: url('egg2.593a9f4f.png');
+        background-position: center;
+        background-size: cover;
+        background-color: var(--light);
+        width: 220px;
+        height: 220px;
       }
 
       @media (max-width: 1200px) {
-        .container {
-          grid-template-columns: 280px 1fr;
-        }
-
-        .sidebar {
-          width: 280px;
-        }
-
         .main-content {
-          margin-left: 280px;
-          padding: 4rem 6%;
-          width: calc(100% - 280px);
+          padding: 4rem 5%;
         }
       }
 
@@ -571,14 +486,14 @@
 
         .sidebar {
           position: relative;
-          height: auto;
+          padding: 1.5rem;
           width: 100%;
-          padding: 2rem;
+          height: auto;
         }
 
         .main-content {
           margin-left: 0;
-          padding: 3rem 5%;
+          padding: 2rem 5%;
           width: 100%;
         }
 
@@ -588,30 +503,35 @@
 
         .about-grid {
           grid-template-columns: 1fr;
+          gap: 2rem;
         }
 
         .welcome-container {
           flex-direction: column-reverse;
+          align-items: center;
           gap: 2rem;
+          text-align: center;
         }
 
-        .headshot-container {
-          margin-bottom: 1rem;
+        h1,
+        h1::after {
+          margin-right: auto;
+          margin-left: auto;
         }
 
-        .headshot-circle {
-          width: 200px;
-          height: 200px;
+        h1::after {
+          left: 50%;
+          transform: translateX(-50%);
         }
       }
 
       @media (max-width: 768px) {
         h1 {
-          font-size: 2.5rem;
+          font-size: 2.3rem;
         }
 
         h2 {
-          font-size: 2rem;
+          font-size: 1.8rem;
         }
 
         .intro {
@@ -625,217 +545,10 @@
         .headshot-circle {
           width: 180px;
           height: 180px;
-          border-width: 6px;
-        }
-      }
-
-      /* Mid-century modern geometric accents */
-      .geometric-accents {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 0;
-        overflow: hidden;
-      }
-
-      .geo-shape {
-        position: absolute;
-        opacity: 0.15;
-      }
-
-      .geo-shape-1 {
-        top: 80px;
-        right: 60px;
-        width: 150px;
-        height: 8px;
-        background-color: var(--mustard);
-        transform: rotate(-35deg);
-      }
-
-      .geo-shape-2 {
-        top: 180px;
-        right: 15%;
-        width: 60px;
-        height: 60px;
-        border: 6px solid var(--secondary);
-        border-radius: 50%;
-      }
-
-      .geo-shape-3 {
-        bottom: 20%;
-        right: 10%;
-        width: 80px;
-        height: 80px;
-        background-color: var(--accent);
-        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-      }
-
-      .geo-shape-4 {
-        bottom: 30%;
-        right: 30%;
-        width: 120px;
-        height: 5px;
-        background-color: var(--primary);
-      }
-
-      .geo-shape-5 {
-        top: 40%;
-        right: 20%;
-        width: 40px;
-        height: 40px;
-        background-color: var(--teal);
-        border-radius: 0 50% 50% 50%;
-        transform: rotate(45deg);
-      }
-
-      .content-wrapper {
-        position: relative;
-        z-index: 1;
-      }
-
-      /* Boomerang mid-century shape */
-      .boomerang {
-        position: absolute;
-        top: 30%;
-        right: 5%;
-        width: 180px;
-        height: 100px;
-        clip-path: path(
-          'M0,0 C60,10 180,40 180,100 L160,100 C160,50 50,25 0,15 L0,0 Z'
-        );
-        background-color: var(--mustard);
-        opacity: 0.12;
-        transform: rotate(15deg);
-      }
-
-      /* Mid-century starburst */
-      .starburst {
-        position: absolute;
-        width: 180px;
-        height: 180px;
-        bottom: 15%;
-        left: 10%;
-        opacity: 0.08;
-        background-image: radial-gradient(
-          circle,
-          transparent 30%,
-          var(--primary) 30%
-        );
-        -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L50 100 M0 50 L100 50 M25 25 L75 75 M25 75 L75 25 M14.64 30.93 L85.36 69.07 M14.64 69.07 L85.36 30.93 M30.93 14.64 L69.07 85.36 M30.93 85.36 L69.07 14.64' stroke='%23000' stroke-width='3'/%3E%3C/svg%3E");
-        mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L50 100 M0 50 L100 50 M25 25 L75 75 M25 75 L75 25 M14.64 30.93 L85.36 69.07 M14.64 69.07 L85.36 30.93 M30.93 14.64 L69.07 85.36 M30.93 85.36 L69.07 14.64' stroke='%23000' stroke-width='3'/%3E%3C/svg%3E");
-        transform: rotate(22.5deg);
-      }
-
-      /* Parallax effect for geometric shapes */
-      .parallax-shape {
-        transition: transform 0.1s ease-out;
-      }
-
-      .welcome-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 3rem;
-      }
-
-      .welcome-content {
-        flex: 1;
-      }
-
-      .headshot-container {
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-      }
-
-      .headshot-circle {
-        width: 240px;
-        height: 240px;
-        border-radius: 50%;
-        background-color: var(--light);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        background-image: url('egg2.593a9f4f.png'); /* Using your existing image for now */
-        background-size: cover;
-        background-position: center;
-        border: 8px solid white;
-        position: relative;
-        z-index: 2;
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-      }
-
-      .headshot-circle:hover {
-        transform: scale(1.03);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-      }
-
-      .headshot-container::before {
-        content: '';
-        position: absolute;
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        background-color: var(--secondary);
-        opacity: 0.1;
-        top: -20px;
-        left: -20px;
-        z-index: 1;
-      }
-
-      .headshot-container::after {
-        content: '';
-        position: absolute;
-        width: 60px;
-        height: 60px;
-        bottom: -10px;
-        right: -10px;
-        background-color: var(--primary);
-        opacity: 0.1;
-        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-        z-index: 1;
-      }
-
-      @media (max-width: 992px) {
-        .welcome-container {
-          flex-direction: column-reverse;
-          gap: 2rem;
         }
 
-        .headshot-container {
-          margin-bottom: 1rem;
-        }
-
-        .headshot-circle {
-          width: 200px;
-          height: 200px;
-        }
-      }
-
-      @media (max-width: 768px) {
-        h1 {
-          font-size: 2.5rem;
-        }
-
-        h2 {
-          font-size: 2rem;
-        }
-
-        .intro {
-          font-size: 1.1rem;
-        }
-
-        .project-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .headshot-circle {
-          width: 180px;
-          height: 180px;
-          border-width: 6px;
+        .project-image {
+          height: 150px;
         }
       }
     </style>
@@ -849,80 +562,58 @@
           </div>
 
           <h3 class="name-title">Jason Eggert</h3>
-          <p class="profession">Creative Developer</p>
+          <!-- <p class="profession">Creative Developer</p> -->
 
           <nav class="nav-menu">
             <ul>
               <li><a href="#home" class="active">Home</a></li>
               <li><a href="#projects">Projects</a></li>
               <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <!-- <li><a href="#contact">Contact</a></li> -->
             </ul>
           </nav>
 
-          <div class="social-links">
+          <!-- <div class="social-links">
             <a href="#" class="social-link" title="LinkedIn">in</a>
             <a href="#" class="social-link" title="GitHub">gh</a>
             <a href="#" class="social-link" title="Twitter">tw</a>
-          </div>
+          </div> -->
         </div>
-
-        <!-- <div class="sidebar-shape"></div>
-        <div class="sidebar-shape-2"></div> -->
       </div>
 
       <div class="main-content">
-        <div class="geometric-accents">
-          <div class="geo-shape geo-shape-1 parallax-shape"></div>
-          <div class="geo-shape geo-shape-2 parallax-shape"></div>
-          <div class="geo-shape geo-shape-3 parallax-shape"></div>
-          <div class="geo-shape geo-shape-4 parallax-shape"></div>
-          <div class="geo-shape geo-shape-5 parallax-shape"></div>
-          <div class="boomerang parallax-shape"></div>
-          <div class="starburst parallax-shape"></div>
-        </div>
-
         <div class="content-wrapper">
           <section id="home">
             <div class="welcome-container">
               <div class="welcome-content">
-                <h1>Welcome</h1>
+                <h1>Hello</h1>
                 <p class="intro">
-                  Hello there! I'm <span class="highlight">Jason Eggert</span>,
-                  a creative developer with a passion for blending design and
-                  technology. My work explores the intersection of digital
-                  experiences and artistic expression, creating meaningful
-                  interactions that engage and inspire through
-                  <span class="highlight">clean code</span> and
-                  <span class="highlight">thoughtful design</span>.
+                  I'm <span class="highlight">Jason Eggert</span>, a developer
+                  working at the intersection of design and code. I build
+                  digital experiences that are functional and thoughtfully
+                  designed.
                 </p>
               </div>
               <div class="headshot-container">
-                <div class="headshot-circle">
-                  <!-- You can replace the background-image in the CSS with your actual headshot -->
-                </div>
+                <div class="headshot-circle"></div>
               </div>
             </div>
           </section>
 
           <section id="projects">
-            <div class="section-heading">
-              <h2>Projects</h2>
-            </div>
+            <h2>Projects</h2>
 
             <div class="project-grid">
               <div class="project-card">
-                <div class="accent-line"></div>
                 <a href="./superposition/">
                   <div class="project-image superposition"></div>
                   <div class="project-content">
                     <h3>SUPERPOSITION</h3>
                     <p>
-                      An interactive quantum computing simulator that visualizes
-                      complex quantum phenomena through an intuitive user
-                      interface.
+                      Quantum computing simulator with interactive
+                      visualizations of quantum phenomena.
                     </p>
-                    <div>
+                    <div class="project-tags">
                       <span class="project-tag">JavaScript</span>
                       <span class="project-tag">Quantum</span>
                     </div>
@@ -932,95 +623,99 @@
               </div>
 
               <div class="project-card">
-                <div class="accent-line"></div>
+                <a href="./dewarp/">
+                  <div class="project-image dewarp"></div>
+                  <div class="project-content">
+                    <h3>DEWARP</h3>
+                    <p>
+                      WebGL tool that transforms fisheye lens images into
+                      standard rectilinear projections.
+                    </p>
+                    <div class="project-tags">
+                      <span class="project-tag">WebGL</span>
+                      <span class="project-tag">Image Processing</span>
+                    </div>
+                    <span class="project-link">View Project</span>
+                  </div>
+                </a>
+              </div>
+
+              <!-- <div class="project-card">
                 <a href="#">
                   <div class="project-image harmonic"></div>
                   <div class="project-content">
                     <h3>HARMONIC</h3>
                     <p>
-                      Experimental audio visualization platform that transforms
-                      sound into dynamic, interactive visual compositions.
+                      Audio visualization tool that converts sound into
+                      interactive visual compositions.
                     </p>
-                    <div>
+                    <div class="project-tags">
                       <span class="project-tag">WebAudio API</span>
                       <span class="project-tag">Canvas</span>
                     </div>
                     <span class="project-link">Coming Soon</span>
                   </div>
                 </a>
-              </div>
+              </div> -->
 
-              <div class="project-card">
-                <div class="accent-line"></div>
+              <!-- <div class="project-card">
                 <a href="#">
                   <div class="project-image retrograde"></div>
                   <div class="project-content">
                     <h3>RETROGRADE</h3>
                     <p>
-                      A collection of mid-century modern inspired graphic
-                      explorations, celebrating the design aesthetic of the
-                      1950s and 60s.
+                      Modern graphic explorations inspired by classic design.
                     </p>
-                    <div>
+                    <div class="project-tags">
                       <span class="project-tag">SVG</span>
                       <span class="project-tag">CSS</span>
                     </div>
                     <span class="project-link">View Gallery</span>
                   </div>
                 </a>
-              </div>
+              </div> -->
             </div>
           </section>
 
           <section id="about">
-            <div class="section-heading">
-              <h2>About Me</h2>
-            </div>
+            <h2>About Me</h2>
 
             <div class="about-grid">
               <div class="about-text">
                 <p>
-                  With over 8 years of experience in creative development, I
-                  specialize in crafting engaging digital experiences that merge
-                  form and function. My approach combines technical precision
-                  with artistic sensitivity, resulting in projects that are both
-                  visually compelling and technically sound.
+                  With 16+ years of experience spanning design, product
+                  management, and engineering leadership, I build digital
+                  experiences that balance form and function. As a lead
+                  engineer, I focus on creating projects that work well and look
+                  good.
                 </p>
-                <p>
-                  I'm particularly fascinated by the intersection of art and
-                  technology, drawing inspiration from mid-century modern design
-                  principles while implementing contemporary development
-                  practices. This fusion of retro aesthetics with cutting-edge
-                  technology creates a distinctive style in my work.
-                </p>
+                <!-- <p>
+                  I'm interested in how art and tech can work together, using
+                  modern development practices with thoughtful design.
+                </p> -->
               </div>
 
               <div>
-                <h3>Skills &amp; Expertise</h3>
+                <h3>Skills</h3>
                 <div class="skills-list">
                   <span class="skill-tag">JavaScript</span>
                   <span class="skill-tag">React</span>
                   <span class="skill-tag">Three.js</span>
                   <span class="skill-tag">WebGL</span>
-                  <span class="skill-tag">CSS Animation</span>
+                  <span class="skill-tag">CSS</span>
                   <span class="skill-tag">SVG</span>
                   <span class="skill-tag">Creative Coding</span>
-                  <span class="skill-tag">UI/UX Design</span>
-                  <span class="skill-tag">Data Visualization</span>
+                  <span class="skill-tag">UI/UX</span>
+                  <span class="skill-tag">Data Viz</span>
                 </div>
               </div>
             </div>
           </section>
 
-          <section id="contact">
-            <div class="section-heading">
-              <h2>Get In Touch</h2>
-            </div>
+          <!-- <section id="contact">
+            <h2>Contact</h2>
 
-            <p>
-              Interested in working together? Have a question about my projects?
-              Feel free to reach out!
-            </p>
+            <p>Want to work together? Have questions? Get in touch.</p>
 
             <div class="contact-form">
               <div class="form-group">
@@ -1040,55 +735,17 @@
 
               <button class="btn">Send Message</button>
             </div>
-          </section>
+          </section> -->
 
           <div class="footer">
             <p>© 2025 Jason Eggert</p>
-            <p>Last updated: April 29, 2025</p>
+            <p>Last updated: May 6, 2025</p>
           </div>
         </div>
       </div>
     </div>
 
     <script>
-      // Enhanced parallax effect for geometric shapes
-      document.addEventListener('mousemove', function (e) {
-        const shapes = document.querySelectorAll('.parallax-shape');
-        const mouseX = e.clientX / window.innerWidth;
-        const mouseY = e.clientY / window.innerHeight;
-
-        shapes.forEach((shape, index) => {
-          // Increased intensity values for more dramatic movement
-          const intensity = 30 + index * 15;
-          const translateX = (mouseX - 0.5) * intensity;
-          const translateY = (mouseY - 0.5) * intensity;
-
-          // Get original rotation if any, or use default
-          const originalRotation = shape.dataset.rotate || '0deg';
-          // Add slight rotation based on mouse position for more dynamic effect
-          const rotationAdjustment = (mouseX - 0.5) * 5;
-
-          // Apply transform with enhanced movement and smoother transition
-          shape.style.transition = 'transform 0.2s ease-out';
-          shape.style.transform = `translate(${translateX}px, ${translateY}px) rotate(calc(${originalRotation} + ${rotationAdjustment}deg))`;
-        });
-      });
-
-      // Initialize data-rotate attributes for shapes that should have initial rotation
-      document.addEventListener('DOMContentLoaded', function () {
-        const geoShape1 = document.querySelector('.geo-shape-1');
-        if (geoShape1) geoShape1.dataset.rotate = '-35deg';
-
-        const boomerang = document.querySelector('.boomerang');
-        if (boomerang) boomerang.dataset.rotate = '15deg';
-
-        const starburst = document.querySelector('.starburst');
-        if (starburst) starburst.dataset.rotate = '22.5deg';
-
-        const geoShape5 = document.querySelector('.geo-shape-5');
-        if (geoShape5) geoShape5.dataset.rotate = '45deg';
-      });
-
       // Smooth scrolling for navigation
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener('click', function (e) {
