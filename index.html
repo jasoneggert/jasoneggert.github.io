@@ -473,6 +473,73 @@
         height: 220px;
       }
 
+      .hero-3d-container {
+        position: relative;
+        margin-bottom: 2.5rem;
+        width: 100%;
+        min-height: 60vh;
+      }
+
+      #scene3d {
+        display: block;
+        border-radius: 1rem;
+        background: #111;
+        width: 100%;
+        height: 60vh;
+      }
+
+      .hero-overlay {
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .hero-title {
+        margin-bottom: 0.5rem;
+        color: #fff;
+        font-weight: 400;
+        font-size: 2.8rem;
+        font-family: 'DM Serif Display', serif;
+        text-shadow: 0 2px 16px #000a;
+      }
+
+      .hero-subtitle {
+        margin-bottom: 1.5rem;
+        color: #e0e0e0;
+        font-size: 1.2rem;
+        text-shadow: 0 1px 8px #0008;
+      }
+
+      .hero-nav {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .hero-link {
+        transition: background 0.2s;
+        box-shadow: 0 2px 8px #0003;
+        border-radius: 2rem;
+        background: var(--primary);
+        padding: 0.6rem 1.6rem;
+        pointer-events: auto;
+        color: #fff;
+        font-weight: 500;
+        font-size: 1.05rem;
+        text-decoration: none;
+      }
+
+      .hero-link:hover {
+        background: var(--accent);
+      }
+
       @media (max-width: 1200px) {
         .main-content {
           padding: 4rem 5%;
@@ -550,8 +617,29 @@
         .project-image {
           height: 150px;
         }
+
+        .hero-title {
+          font-size: 2rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1rem;
+        }
+
+        #scene3d {
+          height: 40vh;
+        }
       }
     </style>
+    <!-- Use legacy Three.js and GLTFLoader for global namespace compatibility (Three.js 0.128.0) -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script>
+      // Debug: Check if GLTFLoader is present after script load
+      console.log('GLTFLoader global after script:', window.GLTFLoader);
+      console.log('THREE after script:', window.THREE);
+      console.log('THREE.GLTFLoader after script:', window.THREE?.GLTFLoader);
+    </script>
   </head>
   <body>
     <div class="container">
@@ -582,6 +670,31 @@
       </div>
 
       <div class="main-content">
+        <div class="hero-3d-container" aria-label="3D Orbis Network Scene">
+          <canvas
+            id="scene3d"
+            tabindex="0"
+            aria-label="3D Orbis Network visualization"
+            style="
+              width: 100%;
+              height: 60vh;
+              display: block;
+              background: #111;
+              border-radius: 1rem;
+              margin-bottom: 2.5rem;
+            "
+          ></canvas>
+          <div class="hero-overlay">
+            <h1 class="hero-title">Jason Eggert</h1>
+            <p class="hero-subtitle">
+              Creative Developer at the intersection of design and code
+            </p>
+            <nav class="hero-nav">
+              <a href="#projects" class="hero-link">Projects</a>
+              <a href="#about" class="hero-link">About</a>
+            </nav>
+          </div>
+        </div>
         <div class="content-wrapper">
           <section id="home">
             <div class="welcome-container">
@@ -702,6 +815,8 @@
                   <span class="skill-tag">React</span>
                   <span class="skill-tag">Three.js</span>
                   <span class="skill-tag">WebGL</span>
+                  <span class="skill-tag">WebRTC</span>
+
                   <span class="skill-tag">CSS</span>
                   <span class="skill-tag">SVG</span>
                   <span class="skill-tag">Creative Coding</span>
@@ -788,6 +903,180 @@
           if (link.getAttribute('href') === `#${currentSection}`) {
             link.classList.add('active');
           }
+        });
+      });
+
+      // 3D Scene Loader for Orbis Network (scene.gltf)
+      window.addEventListener('DOMContentLoaded', () => {
+        // Debug: Check globals before loader logic
+        console.log('window.THREE:', window.THREE);
+        console.log('window.GLTFLoader:', window.GLTFLoader);
+        // Patch: ensure THREE.GLTFLoader is available if only global GLTFLoader is present
+        if (!window.THREE) {
+          console.error('THREE not found');
+          return;
+        }
+        if (!THREE.GLTFLoader && window.GLTFLoader) {
+          THREE.GLTFLoader = window.GLTFLoader;
+        }
+        if (!THREE.GLTFLoader) {
+          console.error('GLTFLoader not found');
+          return;
+        }
+        const canvas = document.getElementById('scene3d');
+        if (!canvas) {
+          console.error('Canvas not found');
+          return;
+        }
+        // Add loading message
+        const loadingMsg = document.createElement('div');
+        loadingMsg.textContent = 'Loading 3D scene...';
+        loadingMsg.style =
+          'color:#fff;background:#333;padding:1rem;border-radius:8px;position:absolute;top:2rem;left:2rem;z-index:10;';
+        canvas.parentElement.appendChild(loadingMsg);
+        // Responsive sizing
+        const getSize = () => {
+          const width = canvas.parentElement.offsetWidth;
+          const height = Math.max(320, window.innerHeight * 0.6);
+          return { width, height };
+        };
+        let { width, height } = getSize();
+        // Renderer
+        const renderer = new THREE.WebGLRenderer({
+          canvas,
+          antialias: true,
+          alpha: true
+        });
+        renderer.setClearColor(0x111111, 1);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(width, height, false);
+        // Scene & Camera
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+          45,
+          width / height,
+          0.1,
+          100
+        );
+        camera.position.set(0, 0.5, 3.5);
+        // Lighting
+        const ambient = new THREE.AmbientLight(0xffffff, 1.1);
+        scene.add(ambient);
+        const dir = new THREE.DirectionalLight(0xffffff, 0.7);
+        dir.position.set(2, 4, 4);
+        scene.add(dir);
+        // Load GLTF
+        const loader = new THREE.GLTFLoader();
+        loader.load(
+          'scene.gltf',
+          (gltf) => {
+            console.log('GLTF loaded', gltf);
+            const model = gltf.scene;
+            // --- Centering tweaks ---
+            // Reset model position and scale for better centering
+            model.position.set(0, 0, 0); // Center horizontally
+            model.scale.set(1.5, 1.5, 1.5); // Slightly larger for visibility
+            // Optionally, adjust vertical offset if needed:
+            // model.position.y = -0.2;
+            scene.add(model);
+            // Reduce opacity of all meshes in the model
+            model.traverse(function (child) {
+              if (child.isMesh && child.material) {
+                if (Array.isArray(child.material)) {
+                  child.material.forEach((mat) => {
+                    mat.transparent = true;
+                    mat.opacity = 0.05;
+                  });
+                } else {
+                  child.material.transparent = true;
+                  child.material.opacity = 0.05;
+                }
+              }
+            });
+            // Adjust camera for better framing
+            camera.position.set(0, 0.2, 2.8);
+            camera.lookAt(0, 0, 0);
+            loadingMsg.remove();
+
+            // --- Mouse Interactivity ---
+            let targetRotationX = 0;
+            let targetRotationY = 0;
+            let currentRotationX = 0;
+            let currentRotationY = 0;
+            let isPointerOver = false;
+
+            // Map mouse position to rotation
+            function onPointerMove(e) {
+              const rect = canvas.getBoundingClientRect();
+              const x = (e.clientX - rect.left) / rect.width;
+              const y = (e.clientY - rect.top) / rect.height;
+              // Map to [-0.5, 0.5]
+              const normX = x - 0.5;
+              const normY = y - 0.5;
+              // Sensitivity: max 0.5 rad (~28deg) in each direction
+              targetRotationY = normX * Math.PI * 0.5;
+              targetRotationX = normY * Math.PI * 0.3;
+            }
+            function onPointerEnter() {
+              isPointerOver = true;
+            }
+            function onPointerLeave() {
+              isPointerOver = false;
+            }
+            canvas.addEventListener('pointermove', onPointerMove);
+            canvas.addEventListener('pointerenter', onPointerEnter);
+            canvas.addEventListener('pointerleave', onPointerLeave);
+            // Accessibility: reset rotation if focus lost
+            canvas.addEventListener('blur', () => {
+              targetRotationX = 0;
+              targetRotationY = 0;
+            });
+
+            // Animation loop with interactivity
+            function animate() {
+              requestAnimationFrame(animate);
+              // Smoothly interpolate toward target rotation
+              if (model) {
+                currentRotationX += (targetRotationX - currentRotationX) * 0.08;
+                currentRotationY += (targetRotationY - currentRotationY) * 0.08;
+                model.rotation.x = currentRotationX;
+                model.rotation.y = currentRotationY;
+                // Subtle idle rotation if not interacting
+                if (!isPointerOver) {
+                  targetRotationY += 0.0025;
+                }
+              }
+              renderer.render(scene, camera);
+            }
+            animate();
+          },
+          (xhr) => {
+            // Progress
+            if (xhr.lengthComputable) {
+              loadingMsg.textContent = `Loading 3D scene... ${(
+                (xhr.loaded / xhr.total) *
+                100
+              ).toFixed(0)}%`;
+            }
+          },
+          (err) => {
+            console.error('GLTF load error', err);
+            canvas.setAttribute(
+              'aria-label',
+              '3D visualization failed to load.'
+            );
+            loadingMsg.textContent = '3D scene failed to load.';
+            loadingMsg.style.background = '#c00';
+          }
+        );
+        // Handle resize
+        window.addEventListener('resize', () => {
+          const size = getSize();
+          width = size.width;
+          height = size.height;
+          camera.aspect = width / height;
+          camera.updateProjectionMatrix();
+          renderer.setSize(width, height, false);
         });
       });
     </script>
