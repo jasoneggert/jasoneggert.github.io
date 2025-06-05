@@ -1032,9 +1032,48 @@
               targetRotationY = 0;
             });
 
+            // --- Vertex Shader Deformation (Custom Shader) ---
+            // We'll use a time uniform and a simple sine-based deformation
+            const deformUniforms = { time: { value: 0 } };
+            model.traverse(function (child) {
+              if (child.isMesh && child.material) {
+                // Use MeshStandardMaterial for PBR look
+                const baseMat = new THREE.MeshStandardMaterial({
+                  color: child.material.color ?? 0xffffff,
+                  metalness: 0.0,
+                  roughness: 0.6,
+                  transparent: true,
+                  opacity: 0.05,
+                  side: THREE.DoubleSide
+                });
+                baseMat.onBeforeCompile = (shader) => {
+                  // Add time uniform
+                  shader.uniforms.time = deformUniforms.time;
+                  // Inject code into vertex shader
+                  shader.vertexShader = shader.vertexShader.replace(
+                    'void main() {',
+                    ['uniform float time;', 'void main() {'].join('\n')
+                  );
+                  // Deform position: add a wavy offset based on position and time
+                  shader.vertexShader = shader.vertexShader.replace(
+                    '#include <begin_vertex>',
+                    [
+                      '#include <begin_vertex>',
+                      'float freq = 1.0;',
+                      'float amp = 0.03;',
+                      'transformed += normal * (sin(position.x * freq + time * 1.2) + cos(position.y * freq + time * 1.5)) * amp;'
+                    ].join('\n')
+                  );
+                };
+                child.material = baseMat;
+              }
+            });
+
             // Animation loop with interactivity
             function animate() {
               requestAnimationFrame(animate);
+              // Update time uniform for deformation
+              deformUniforms.time.value = performance.now() * 0.001;
               // Smoothly interpolate toward target rotation
               if (model) {
                 currentRotationX += (targetRotationX - currentRotationX) * 0.08;
